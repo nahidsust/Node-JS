@@ -37,7 +37,20 @@ req.on('end',()=>{
 })
 
 
-}else if(req.url==='/practice.html'){
+}
+else if (req.url === '/show' && req.method === 'GET') {
+  connection.query('SELECT * FROM naming', (err, result) => {
+    if (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end(`Show ${err}`);
+    } else {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(result));
+    }
+  });
+}
+
+else if(req.url==='/practice.html'){
     const x=path.join(__dirname,'practice.html')
   fs.readFile(x,(err,r)=>{
     if(err)res.end('Error')

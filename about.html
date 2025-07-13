@@ -12,5 +12,20 @@
   <input type="text" name="mail" placeholder="enter last name" required><br><br>
   <button type="submit">Submitt</button>
 </form>
+<ul id="names"></ul>
+<script>
+  fetch('/show')
+  .then(res=>res.json())
+  .then(data=>{
+    const x=document.getElementById('names')
+    for(let  i=0;i<data.length;i++){
+              const p=document.createElement('li')
+              p.innerHTML=`${data[i].id}  ${data[i].name}`;
+              x.appendChild(p);
+    }
+
+  })
+  .catch(err=>document.getElementById('names').innerHTML="<li>Sorry</li>")
+</script>
 </body>
 </html>
